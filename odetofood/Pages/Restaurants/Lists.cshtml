@@ -1,0 +1,24 @@
+﻿@page
+@model odetofood.Pages.Restaurants.ListsModel
+@{
+}
+<h1>Test lists</h1>
+
+@Model.HelloMessage
+
+<br>
+
+<table class="table">
+    @foreach (var restaurant in Model.MyRestaurants)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Location</td>
+            <td>@restaurant.Cuisine</td>
+        </tr>
+    }
+</table>
+
+<hr>
+
+@Model.MsgFromAppSelttings
