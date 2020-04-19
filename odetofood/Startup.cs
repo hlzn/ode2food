@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using odetofood.data;
+using odetoofd.data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace odetofood
 {
@@ -24,7 +26,9 @@ namespace odetofood
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddDbContextPool<OdeToFoodDbContext>(options => { options.UseSqlServer(Configuration.GetConnectionString("OdeToFood")); });
+
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
 
             services.AddRazorPages();
         }

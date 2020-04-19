@@ -1,0 +1,8 @@
+for the dotnet-ef to work:
+1) create the factory class
+2) point to the runtime project when using dotnet-ef like this:
+    dotnet-ef dbcontext info -s '..\odetofood\odetofood.csproj'
+
+To update run:
+
+    dotnet-ef database update -s '..\odetofood\odetofood.csproj'

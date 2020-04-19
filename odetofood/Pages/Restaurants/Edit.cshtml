@@ -1,0 +1,35 @@
+﻿@page "{restaurantId:int?}"
+@model odetofood.Pages.Restaurants.EditModel
+@{
+}
+
+<h2>Editing @Model.restaurant.Name</h2>
+
+<form action="" method="post">
+
+    <input type="hidden" asp-for="restaurant.Id">
+
+    <div class="form-group">
+        <label asp-for="restaurant.Name"></label>
+        <input asp-for="restaurant.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="restaurant.Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="restaurant.Location"></label>
+        <input asp-for="restaurant.Location" class="form-control" />
+        <span class="text-danger" asp-validation-for="restaurant.Location"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="restaurant.Cuisine"></label>
+        <select class="form-control" asp-for="restaurant.Cuisine" 
+                                                   asp-items="@Model.cuisines">
+        <span class="text-danger" asp-validation-for="restaurant.Cuisine"></span>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+</form>

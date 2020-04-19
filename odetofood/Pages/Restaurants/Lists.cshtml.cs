@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
-using odetofood.data;
+using odetoofd.data;
 using OdeToFood.Core;
 
 namespace odetofood.Pages.Restaurants
@@ -21,6 +21,9 @@ namespace odetofood.Pages.Restaurants
         private readonly IRestaurantData restaurantData;
 
         public IEnumerable<Restaurant> MyRestaurants { get; set; }
+        
+        [BindProperty(SupportsGet=true)]
+        public string SearchTerm { get; set; }
 
         public ListsModel(IConfiguration config, IRestaurantData restaurantData)
         {
@@ -30,9 +33,11 @@ namespace odetofood.Pages.Restaurants
 
         public void OnGet()
         {
+            //var searchTerm = HttpContext.Request.QueryString["searchTerm"];
+
             HelloMessage = "Hello from model";
             MsgFromAppSelttings = config["Message"];
-            MyRestaurants = restaurantData.GetAll();
+            MyRestaurants = restaurantData.GetRestaurantsByName(SearchTerm);
         }
     }
 }

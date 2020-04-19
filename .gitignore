@@ -5,3 +5,6 @@ odetofood.core/bin/*
 odetofood.core/obj/*
 odetoofd.data/bin/*
 odetoofd.data/obj/*
+odetofood.console/bin/*
+odetofood.console/obj/*
+odetoofd.data/Migrations/*
