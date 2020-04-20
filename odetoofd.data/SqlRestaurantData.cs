@@ -36,7 +36,7 @@ namespace odetoofd.data
 
         public IEnumerable<Restaurant> GetAll()
         {
-            return db.Restaurants;
+            return db.Restaurants.ToList();
         }
 
         public Restaurant GetById(int id)
@@ -47,7 +47,7 @@ namespace odetoofd.data
         public IEnumerable<Restaurant> GetRestaurantsByName(string name)
         {
             var query = from r in db.Restaurants
-                        where r.Name.Contains(name)
+                        where r.Name.Contains(name) || string.IsNullOrEmpty(name)
                         select r;
             return query;
         }
@@ -57,6 +57,11 @@ namespace odetoofd.data
             var entity = db.Restaurants.Attach(updatedRestaurant);
             entity.State = EntityState.Modified;
             return updatedRestaurant;
+        }
+
+        public int GetCountOfRestaurants()
+        {
+            return db.Restaurants.Count();
         }
     }
 }

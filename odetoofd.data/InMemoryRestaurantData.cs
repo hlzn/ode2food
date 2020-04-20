@@ -74,6 +74,11 @@ namespace odetoofd.data
             }
             return restaurant;
         }
+
+        public int GetCountOfRestaurants()
+        {
+            return restaurants.Count();
+        }
     }
 
 }

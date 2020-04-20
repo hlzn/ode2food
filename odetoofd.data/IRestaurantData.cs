@@ -19,6 +19,8 @@ namespace odetoofd.data
         Restaurant Add(Restaurant newRestaurant);
 
         Restaurant Delete(int id);
+
+        int GetCountOfRestaurants();
     }
 
     

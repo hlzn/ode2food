@@ -33,13 +33,15 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - odetofood - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            @RenderSection("footer", required: false)
+            <vc:restaurant-count></vc:restaurant-count>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>
