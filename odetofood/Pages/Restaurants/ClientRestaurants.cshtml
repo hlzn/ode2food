@@ -3,16 +3,43 @@
 @{
 }
 
+<h2>Client Restaurants</h2>
+
+<table class="table" id="restaurants"></table>
+
 @section Scripts {
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    
+    
+    <environment include="Development">
+        <link rel="stylesheet" href="~/node_modules/dataTables.net-dt/css/jquery.dataTables.min.css" />
+        <script src="~/node_modules/dataTables.net/js/jquery.dataTables.js"></script>
+        <script src="~/node_modules/dataTables.net-dt/js/dataTables.dataTables.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    </environment>
+    
     <script>
 
         $(function() {
+            var cuisines = ["Unknown", "Mexican", "Italian", "Indian"];
+
             $.ajax("/api/restaurant/", 
             { method: "GET" })
             .then(function(response){
-                console.dir(response);
+                $('#restaurants').dataTable({
+                    data: response,
+                    columns:[
+                        {"data" : "name" },
+                        {"data" : "location" },
+                        {"data" : "cuisine", 
+                         "render": function(data){
+                                return cuisines[data];
+                            } 
+                        },
+                    ]
+                });
             })
         });
 

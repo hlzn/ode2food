@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using odetoofd.data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.AspNetCore.Http;
 
 namespace odetofood
 {
@@ -49,6 +50,8 @@ namespace odetofood
                 app.UseHsts();
             }
 
+            app.Use(SayHelloMiddleware);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -56,11 +59,26 @@ namespace odetofood
 
             app.UseAuthorization();
 
+            app.UseNodeModules(maxAge: TimeSpan.FromSeconds(600));
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+        }
+
+        private RequestDelegate SayHelloMiddleware(RequestDelegate arg)
+        {
+            return async ctx =>
+            {
+                if (ctx.Request.Path.StartsWithSegments("/hello"))
+                {
+                    await ctx.Response.WriteAsync("Hello world!");
+                } else {
+                    await arg(ctx);
+                }
+            };
         }
     }
 }

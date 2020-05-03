@@ -8,3 +8,4 @@ odetoofd.data/obj/*
 odetofood.console/bin/*
 odetofood.console/obj/*
 odetoofd.data/Migrations/*
+odetofood/node_modules/*
